@@ -16,7 +16,7 @@ function AboutPage() {
         <section className="my-story">
             <h1>The Story</h1>
             <p>
-            It all started on a cold wintery Sunday afternoon. Bored of bathing in endless baths of spaghetti hoops, I decided to make an app that would help me solve the a foodie dilemma - to store all my fave nosh places under one place and have the ability to quickly acces details and book a table and voila..the Nosh Map was born!    
+            It all started on a cold wintery Sunday afternoon. Bored of bathing in endless baths of spaghetti hoops, I decided to make an app that would help me solve the a foodie dilemma - to store all my fave nosh places under one place and have the ability to quickly accesd details and book a table as and when needed and voila..the Nosh Map was born!    
             </p>
         </section>
         <img src={imgURL} alt="coffee-gif" />
