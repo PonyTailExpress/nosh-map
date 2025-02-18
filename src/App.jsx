@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 import AddRestaurant from "./Pages/AddResturant/AddRestaurant";
 import BookTable from "./Pages/BookTable/BookTable";
@@ -16,7 +21,10 @@ function App() {
       <Navbar />
       <div className="main-content">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          {/* Redirect root ("/") to "/home" */}
+          <Route path="/" element={<Navigate to="/home" />} />
+          {/* Route for /home path */}
+          <Route path="/home" element={<HomePage />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="book-a-table" element={<BookTable />} />
           <Route path="details" element={<RestaurantDetails />} />
