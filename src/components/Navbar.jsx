@@ -4,11 +4,10 @@ function Navbar() {
   return (
     <nav className="Navbar">
       <ul>
-        <Link to="/"> Home </Link>
-        <Link to="/about"> About </Link>
-        <Link to="/add-restaurant"> AddRestaurantPage </Link>
-        <Link to="/book-a-table"> TableBooking </Link>
-
+        <li><Link to="/"> Home </Link></li>
+        <li><Link to="/about"> About Us </Link></li>
+        <li><Link to="/add-restaurant"> Add Restaurant </Link></li>
+        <li><Link to="/book-a-table"> Table Booking </Link></li>
       </ul>
     </nav>
   );
