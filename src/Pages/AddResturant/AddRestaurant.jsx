@@ -1,6 +1,7 @@
 // src/Pages/AddRestaurant/AddRestaurant.jsx
 import React, { useState } from "react";
 import axios from "axios";
+import "./AddRestaurant.css";
 
 function AddRestaurant({ onRestaurantAdded }) {
   const [name, setName] = useState("");
@@ -39,7 +40,7 @@ function AddRestaurant({ onRestaurantAdded }) {
     <div className="add-restaurant">
       <h4>Add a New Restaurant</h4>
       <form onSubmit={handleSubmit}>
-        <label>Name: </label>
+        <label>Name</label>
         <input
           type="text"
           name="name"
@@ -48,7 +49,7 @@ function AddRestaurant({ onRestaurantAdded }) {
           required
         />
 
-        <label>Address: </label>
+        <label>Address</label>
         <input
           type="text"
           name="address"
@@ -57,7 +58,7 @@ function AddRestaurant({ onRestaurantAdded }) {
           required
         />
 
-        <label>Website: </label>
+        <label>Website</label>
         <input
           type="url"
           name="website"
