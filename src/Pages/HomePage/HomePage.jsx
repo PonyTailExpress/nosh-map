@@ -1,77 +1,36 @@
-import {
-  useLoadScript,
-  GoogleMap,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
-import { useState } from "react";
-
-const libraries = ["places"];
-
-const mapContainerStyle = {
-  width: "80vw",
-  height: "60vh",
-  margin: "auto",
-};
-
-const center = {
-  lat: 48.1351,
-  lng: 11.582,
-};
-
-const restaurant = {
-  name: "Beirut Beirut",
-  lat: 48.1268,
-  lng: 11.5822,
-  website: "https://www.beirutbeirut.de/",
-};
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import RestaurantList from "./RestaurantsLists";
 
 function HomePage() {
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-    libraries,
-  });
+  const [restaurants, setRestaurants] = useState([]);
 
-  const [selected, setSelected] = useState(null);
+  // Fetch the list of restaurants from Firebase
+  const fetchRestaurants = async () => {
+    try {
+      const response = await axios.get(
+        "https://nosh-map-default-rtdb.europe-west1.firebasedatabase.app/restaurant.json"
+      );
+      const restaurantList = Object.keys(response.data).map((key) => ({
+        id: key,
+        ...response.data[key],
+      }));
+      setRestaurants(restaurantList);
+    } catch (error) {
+      console.error("Error fetching restaurants:", error);
+    }
+  };
 
-  if (loadError) return <p>Error loading maps</p>;
-  if (!isLoaded) return <p>Loading maps...</p>;
+  // Call fetchRestaurants when component mounts to get initial list
+  useEffect(() => {
+    fetchRestaurants();
+  }, []);
 
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div className="homepage">
       <h1>Welcome to the Nosh Map!</h1>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={14}
-        center={center}
-      >
-        {/* Marker for Restaurant */}
-        <Marker
-          position={{ lat: restaurant.lat, lng: restaurant.lng }}
-          onClick={() => setSelected(restaurant)}
-        />
 
-        {/* InfoWindow shows when a marker is clicked */}
-        {selected && (
-          <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
-            onCloseClick={() => setSelected(null)}
-          >
-            <div>
-              <h3>{selected.name}</h3>
-              <p>
-                <a
-                  href={selected.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Visit Website
-                </a>
-              </p>
-            </div>
-          </InfoWindow>
-        )}
-      </GoogleMap>
+      <RestaurantList restaurants={restaurants} />
     </div>
   );
 }

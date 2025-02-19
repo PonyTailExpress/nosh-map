@@ -14,6 +14,7 @@ import RestaurantDetails from "./Pages/RestaurantDetails/RestaurantDetails";
 import HomePage from "./Pages/HomePage/HomePage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import RestaurantList from "./Pages/HomePage/RestaurantsLists";
 
 function App() {
   return (
