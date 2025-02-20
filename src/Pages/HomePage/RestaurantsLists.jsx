@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import apiClient from "../../Services/api";
 
 function RestaurantList({ restaurants, onDelete, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
   const [currentRestaurant, setCurrentRestaurant] = useState(null);
-  const navigate = useNavigate(); // Initialize navigate hook
+  const navigate = useNavigate();
 
   const handleDelete = async (id) => {
     try {
@@ -45,14 +45,12 @@ function RestaurantList({ restaurants, onDelete, onUpdate }) {
     }
   };
 
-  // Function to navigate to the details page when a restaurant is clicked
   const handleRestaurantClick = (id) => {
-    navigate(`/restaurant/${id}`); // Navigate to the restaurant details page with the restaurant's id
+    navigate(`/restaurant/${id}`);
   };
 
   return (
     <div className="restaurant-list">
-      <h4>Your Nosh List</h4>
       {isEditing ? (
         <div className="edit-form">
           <h5>Edit Restaurant</h5>
@@ -98,8 +96,8 @@ function RestaurantList({ restaurants, onDelete, onUpdate }) {
           {restaurants.map((restaurant) => (
             <li key={restaurant.id} className="restaurant-item">
               <div
-                onClick={() => handleRestaurantClick(restaurant.id)} // Make the entire restaurant item clickable
-                style={{ cursor: "pointer" }} // Optional: add a pointer cursor for better UX
+                onClick={() => handleRestaurantClick(restaurant.id)}
+                style={{ cursor: "pointer" }}
               >
                 <strong>{restaurant.name}</strong>
                 <br />
