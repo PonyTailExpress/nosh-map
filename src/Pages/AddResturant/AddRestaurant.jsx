@@ -1,36 +1,26 @@
-// src/Pages/AddRestaurant/AddRestaurant.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "./AddRestaurant.css";
 
-function AddRestaurant({ onRestaurantAdded }) {
+function AddRestaurant() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [website, setWebsite] = useState("");
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create the restaurant object
     const newRestaurant = { name, address, website };
 
     try {
-      // Send the data to Firebase Realtime Database using a POST request
       await axios.post(
         "https://nosh-map-default-rtdb.europe-west1.firebasedatabase.app/restaurant.json",
         newRestaurant
       );
 
-      // Reset form fields
       setName("");
       setAddress("");
       setWebsite("");
-
-      // Trigger the parent callback to update the list
-      if (onRestaurantAdded) {
-        onRestaurantAdded();
-      }
     } catch (error) {
       console.error("Error adding restaurant:", error);
     }
@@ -38,7 +28,7 @@ function AddRestaurant({ onRestaurantAdded }) {
 
   return (
     <div className="add-restaurant">
-      <h4>Add a New Restaurant</h4>
+      <h4>Foodie Favourites Start Here, Add Yours!</h4>
       <form onSubmit={handleSubmit}>
         <label>Name</label>
         <input

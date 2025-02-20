@@ -1,23 +1,19 @@
-import React, { useState } from "react";
-import axios from "axios";
+import { useState } from "react";
+import apiClient from "../../Services/api";
 
 function RestaurantList({ restaurants, onDelete, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
   const [currentRestaurant, setCurrentRestaurant] = useState(null);
 
-  // Handle Delete
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `https://nosh-map-default-rtdb.europe-west1.firebasedatabase.app/restaurant/${id}.json`
-      );
-      onDelete(id); // Notify parent component to refresh the list
+      await apiClient.delete(`/restaurant/${id}.json`);
+      onDelete(id);
     } catch (error) {
       console.error("Error deleting restaurant:", error);
     }
   };
 
-  // Handle Edit Button Click
   const handleEditClick = (restaurant) => {
     setIsEditing(true);
     setCurrentRestaurant({ ...restaurant });
@@ -32,16 +28,16 @@ function RestaurantList({ restaurants, onDelete, onUpdate }) {
     }));
   };
 
-  // Handle Update Form Submit
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(
-        `https://nosh-map-default-rtdb.europe-west1.firebasedatabase.app/restaurant/${currentRestaurant.id}.json`,
+      await apiClient.put(
+        `/restaurant/${currentRestaurant.id}.json`,
         currentRestaurant
       );
-      onUpdate(); // Notify parent component to refresh the list
-      setIsEditing(false); // Close the edit form
+      console.log("Updated restaurant:", currentRestaurant);
+      onUpdate();
+      setIsEditing(false);
     } catch (error) {
       console.error("Error updating restaurant:", error);
     }
@@ -49,8 +45,7 @@ function RestaurantList({ restaurants, onDelete, onUpdate }) {
 
   return (
     <div className="restaurant-list">
-      <h4>Restaurant List</h4>
-      {/* Edit Form */}
+      <h4>Your Nosh List</h4>
       {isEditing ? (
         <div className="edit-form">
           <h5>Edit Restaurant</h5>
