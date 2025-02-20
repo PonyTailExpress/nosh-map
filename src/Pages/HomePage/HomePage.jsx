@@ -75,7 +75,7 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="homepage" style={{ textAlign: "center", padding: "20px" }}>
+    <div style={{ textAlign: "center", padding: "20px" }}>
       <h2>Your Fave Nosh Gems</h2>
 
       {/* Restaurant list */}
