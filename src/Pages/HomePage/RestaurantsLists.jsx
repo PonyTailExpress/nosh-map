@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../Services/api";
+import "./RestaurantsLists.css";
 
 function RestaurantList({ restaurants, onDelete, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);

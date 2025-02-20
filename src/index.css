@@ -22,6 +22,8 @@
     align-items: center;
     margin-top: 10px;
     font-family: "OCR A STd", monospace;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .logo-container {
@@ -111,51 +113,6 @@ h4 {
     margin-bottom: 20px;
 }
 
-.restaurant-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.restaurant-list ul {
-    list-style: none;
-    padding: 0;
-}
-
-.restaurant-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 80%;
-}
-
-.restaurant-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.restaurant-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.restaurant-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-}
-
 h5 {
     font-size: 1.2rem;
     margin-bottom: 10px;
@@ -184,6 +141,8 @@ p {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .delete-btn:hover {
@@ -207,15 +166,60 @@ p {
 
 .restaurant-item button {
     margin-right: 10px;
-    /* Space between buttons */
 }
 
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.5rem;
-    }
+.map-container {
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+}
 
-    p {
-        font-size: 0.9rem;
+.error-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+}
+
+.error-page h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #f33303;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+/* Target h2 inside HomePage */
+.homepage h2 {
+    font-family: 'Courier New',
+        Courier,
+        monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ef9535;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;
     }
+        .map-container {
+            height: 300px;
+        }
+        restaurant-list {
+            grid-template-columns: 1fr;
+        }
+    
+        .restaurant-item {
+            width: 100%;
+        }
 }

@@ -1,4 +1,3 @@
-import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,10 +6,10 @@ import {
 } from "react-router-dom";
 
 import AddRestaurant from "./Pages/AddResturant/AddRestaurant";
-import BookTable from "./Pages/BookTable/BookTable";
-import AboutUs from "./Pages/AboutUs";
+import BookTable from "./Pages/BookTable";
+import AboutUs from "./Pages/AboutUs/AboutUs";
 import NotFoundPage from "./components/NotFoundPage";
-import RestaurantDetails from "./Pages/RestaurantDetails/RestaurantDetails";
+import RestaurantDetails from "./Pages/RestaurantDetails";
 import HomePage from "./Pages/HomePage/HomePage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";

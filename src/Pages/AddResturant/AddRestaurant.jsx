@@ -6,6 +6,7 @@ function AddRestaurant() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [website, setWebsite] = useState("");
+  const [successMessage, setSuccessMessage] = useState(""); // State for success message
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +22,12 @@ function AddRestaurant() {
       setName("");
       setAddress("");
       setWebsite("");
+      setSuccessMessage("Bosh! Restaurant Added! 🍽️"); // Set success message
+
+      // Clear message after 3 seconds
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
     } catch (error) {
       console.error("Error adding restaurant:", error);
     }
@@ -28,7 +35,12 @@ function AddRestaurant() {
 
   return (
     <div className="add-restaurant">
-      <h4>Foodie Favourites Start Here, Add Yours!</h4>
+      <h1>Foodie Favourites Start Here, Add Yours!</h1>
+
+      {successMessage && (
+        <div className="success-message">{successMessage}</div>
+      )}
+
       <form onSubmit={handleSubmit}>
         <label>Name</label>
         <input
