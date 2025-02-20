@@ -29,6 +29,9 @@ VITE_GOOGLE_MAPS_API_KEY=AIzaSyCLV82K_hxELmL0LNiqLhyfxS-5Z66x_20
 4. Run the application
    After setting up the environment variables, run the following command to start the development server:
 
+   npm run dev
+
+
 🌐 Demo
 You can view the live demo of the application at:
 
