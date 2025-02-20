@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import RestaurantList from "./RestaurantsLists";
 import apiClient from "../../Services/api";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
+  const navigate = useNavigate();
 
   const fetchRestaurants = async () => {
     try {
@@ -25,6 +27,10 @@ function HomePage() {
 
   const handleRestaurantUpdated = () => {
     fetchRestaurants();
+  };
+
+  const handleRestaurantClick = (id) => {
+    navigate(`/restaurant/${id}`); // Navigates to the details page with the restaurant's id
   };
 
   useEffect(() => {

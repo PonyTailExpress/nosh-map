@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import apiClient from "../../Services/api";
 
 function RestaurantList({ restaurants, onDelete, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
   const [currentRestaurant, setCurrentRestaurant] = useState(null);
+  const navigate = useNavigate(); // Initialize navigate hook
 
   const handleDelete = async (id) => {
     try {
@@ -41,6 +43,11 @@ function RestaurantList({ restaurants, onDelete, onUpdate }) {
     } catch (error) {
       console.error("Error updating restaurant:", error);
     }
+  };
+
+  // Function to navigate to the details page when a restaurant is clicked
+  const handleRestaurantClick = (id) => {
+    navigate(`/restaurant/${id}`); // Navigate to the restaurant details page with the restaurant's id
   };
 
   return (
@@ -90,7 +97,10 @@ function RestaurantList({ restaurants, onDelete, onUpdate }) {
         <ul>
           {restaurants.map((restaurant) => (
             <li key={restaurant.id} className="restaurant-item">
-              <div>
+              <div
+                onClick={() => handleRestaurantClick(restaurant.id)} // Make the entire restaurant item clickable
+                style={{ cursor: "pointer" }} // Optional: add a pointer cursor for better UX
+              >
                 <strong>{restaurant.name}</strong>
                 <br />
                 {restaurant.address}
