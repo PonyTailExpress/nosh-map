@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import apiClient from "../Services/api";
+import apiClient from "../services/api";
 
 function RestaurantDetails() {
   const { id } = useParams(); // Get the restaurant ID from the URL
