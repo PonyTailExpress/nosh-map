@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import RestaurantList from "./RestaurantsLists";
-import apiClient from "../../Services/api";
 import { useNavigate } from "react-router-dom";
 import GoogleMapComponent from "../../components/GoogleMap";
+import axios from "axios";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
   const navigate = useNavigate();
 
-  // Function to fetch coordinates using Geocoding API
   const fetchCoordinates = async (address) => {
     const encodedAddress = encodeURIComponent(address);
     const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${
@@ -25,7 +26,6 @@ function HomePage() {
         return { lat, lng };
       }
 
-      // If geocoding fails or no results, return null coordinates
       return { lat: null, lng: null };
     } catch (error) {
       console.error("Error fetching geocode data:", error);
@@ -33,10 +33,9 @@ function HomePage() {
     }
   };
 
-  // Fetch restaurants and their coordinates
   const fetchRestaurants = async () => {
     try {
-      const response = await apiClient.get("/restaurant.json");
+      const response = await axios.get(`${BASE_URL}/restaurant.json`);
       console.log("Fetched restaurants:", response.data);
 
       const restaurantList = await Promise.all(
@@ -67,7 +66,7 @@ function HomePage() {
   };
 
   const handleRestaurantClick = (id) => {
-    navigate(`/restaurant/${id}`); // Navigates to the details page with the restaurant's id
+    navigate(`/restaurant/${id}`);
   };
 
   useEffect(() => {
@@ -78,15 +77,13 @@ function HomePage() {
     <div style={{ textAlign: "center", padding: "20px" }}>
       <h2>Your Fave Nosh Gems</h2>
 
-      {/* Restaurant list */}
       <RestaurantList
         restaurants={restaurants}
         onDelete={handleRestaurantDeleted}
         onUpdate={handleRestaurantUpdated}
-        onClick={handleRestaurantClick} // Pass this handler for restaurant click
+        onClick={handleRestaurantClick}
       />
 
-      {/* Google Map below the restaurant list */}
       <GoogleMapComponent restaurants={restaurants} />
     </div>
   );

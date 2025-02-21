@@ -2,11 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 import "./AddRestaurant.css";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function AddRestaurant() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [website, setWebsite] = useState("");
-  const [successMessage, setSuccessMessage] = useState(""); // State for success message
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,17 +16,13 @@ function AddRestaurant() {
     const newRestaurant = { name, address, website };
 
     try {
-      await axios.post(
-        "https://nosh-map-default-rtdb.europe-west1.firebasedatabase.app/restaurant.json",
-        newRestaurant
-      );
+      await axios.post(`${BASE_URL}/restaurant.json`, newRestaurant);
 
       setName("");
       setAddress("");
       setWebsite("");
-      setSuccessMessage("Bosh! Restaurant Added! 🍽️"); // Set success message
+      setSuccessMessage("Bosh! Restaurant Added! 🍽️");
 
-      // Clear message after 3 seconds
       setTimeout(() => {
         setSuccessMessage("");
       }, 3000);

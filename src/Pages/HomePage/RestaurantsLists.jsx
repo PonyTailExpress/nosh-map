@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import apiClient from "../../Services/api";
 import "./RestaurantsLists.css";
+import axios from "axios";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function RestaurantList({ restaurants, onDelete, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -10,7 +12,7 @@ function RestaurantList({ restaurants, onDelete, onUpdate }) {
 
   const handleDelete = async (id) => {
     try {
-      await apiClient.delete(`/restaurant/${id}.json`);
+      await axios.delete(`${BASE_URL}/restaurant/${id}.json`);
       onDelete(id);
     } catch (error) {
       console.error("Error deleting restaurant:", error);
@@ -34,8 +36,8 @@ function RestaurantList({ restaurants, onDelete, onUpdate }) {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
-      await apiClient.put(
-        `/restaurant/${currentRestaurant.id}.json`,
+      await axios.put(
+        `${BASE_URL}/restaurant/${currentRestaurant.id}.json`,
         currentRestaurant
       );
       console.log("Updated restaurant:", currentRestaurant);

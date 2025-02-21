@@ -1,16 +1,17 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import apiClient from "../services/api";
+import axios from "axios";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function RestaurantDetails() {
-  const { id } = useParams(); // Get the restaurant ID from the URL
+  const { id } = useParams();
   const [restaurant, setRestaurant] = useState(null);
 
   useEffect(() => {
-    // Fetch restaurant details by ID
     const fetchRestaurantDetails = async () => {
       try {
-        const response = await apiClient.get(`/restaurant/${id}.json`);
+        const response = await axios.get(`${BASE_URL}/restaurant/${id}.json`);
         setRestaurant(response.data);
       } catch (error) {
         console.error("Error fetching restaurant details:", error);

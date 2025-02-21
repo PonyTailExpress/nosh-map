@@ -2,7 +2,7 @@ import React from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const GoogleMapComponent = ({ restaurants }) => {
-  const defaultCenter = { lat: 48.1351, lng: 11.582 }; // Default center (Munich, Germany)
+  const defaultCenter = { lat: 48.1351, lng: 11.582 }; // Default center is Munich, Germany
 
   const mapOptions = {
     zoom: 12,
